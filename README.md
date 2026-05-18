@@ -41,5 +41,5 @@
 
 ### Sprint 4
 - Juego Preguntados (API externa)
-- Juego propio
+- Juego propio (QUIZ de marcas de Autos)
 - Página de resultados con 4 tablas ordenadas por desempeño
