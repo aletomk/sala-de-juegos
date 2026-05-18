@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+/**
+ * Componente Home - Página principal de la Sala de Juegos.
+ * Muestra las cards de acceso a cada juego disponible.
+ * 
+ * En Sprint 1 la navegación es libre sin restricciones.
+ * En Sprint 2 se agregará lógica condicional según el estado
+ * de autenticación del usuario (logueado / no logueado).
+ */
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -10,6 +18,11 @@ import { RouterLink } from '@angular/router';
 })
 export class Home {
 
+  /**
+   * Array con los datos de cada juego disponible en la sala.
+   * Se recorre en el template con for para generar las cards dinámicamente.
+   * Cada objeto contiene el nombre, ícono de Bootstrap Icons, ruta y descripción.
+   */
   juegos = [
     { 
       nombre: 'Ahorcado', 
@@ -30,10 +43,10 @@ export class Home {
       descripcion: 'Respondé preguntas de cultura general' 
     },
     { 
-      nombre: 'Juego Propio', 
-      icono: 'bi-star', 
-      ruta: '/juego-propio', 
-      descripcion: 'Próximamente...' 
+      nombre: 'Logo Quiz Automotriz', 
+      icono: 'bi-car-front', 
+      ruta: '/logo-quiz', 
+      descripcion: 'Adiviná la marca del auto según su logo' 
     },
   ];
 }

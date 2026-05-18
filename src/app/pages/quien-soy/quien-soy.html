@@ -2,7 +2,7 @@
 
   @if (cargando()) {
     <div class="text-center mt-5">
-      <div class="spinner-border text-primary" role="status"></div>
+      <div class="spinner-border" role="status"></div>
       <p class="mt-2">Cargando perfil...</p>
     </div>
   }
@@ -14,41 +14,89 @@
   }
 
   @if (usuario()) {
-    <div class="card mx-auto" style="max-width: 500px;">
-      <div class="card-body text-center">
-        <img 
-          [src]="usuario().avatar_url" 
-          alt="Foto de perfil"
-          class="rounded-circle mb-3"
-          width="120"
-          height="120"
-        />
-        <h2 class="card-title">{{ usuario().name || usuario().login }}</h2>
-        <p class="text-muted">{{ usuario().bio }}</p>
-        
-        <div class="row text-center mt-3">
-          <div class="col">
-            <strong>{{ usuario().public_repos }}</strong>
-            <p class="stat-label">Repositorios</p>
-          </div>
-          <div class="col">
-            <strong>{{ usuario().followers }}</strong>
-            <p class="stat-label">Seguidores</p>
-          </div>
-          <div class="col">
-            <strong>{{ usuario().following }}</strong>
-            <p class="stat-label">Siguiendo</p>
-          </div>
-        </div>
+    <div class="perfil-card mx-auto">
 
-        <a 
-          [href]="usuario().html_url" 
-          target="_blank" 
-          class="btn btn-dark mt-3"
-        >
-          Ver perfil en GitHub
+      <div class="text-center mb-4">
+        <img
+          [src]="usuario().avatar_url"
+          alt="Foto de perfil"
+          class="perfil-avatar"
+        />
+        <h2 class="mt-3">{{ usuario().name || usuario().login }}</h2>
+        <p class="perfil-bio">{{ usuario().bio }}</p>
+        <span class="perfil-fecha">
+          <i class="bi bi-calendar3"></i>
+          En GitHub desde {{ formatearFecha(usuario().created_at) }}
+        </span>
+      </div>
+
+      <div class="perfil-stats">
+        <div class="stat-item">
+          <strong>{{ usuario().public_repos }}</strong>
+          <p class="stat-label">Repositorios</p>
+        </div>
+        <div class="stat-item">
+          <strong>{{ usuario().followers }}</strong>
+          <p class="stat-label">Seguidores</p>
+        </div>
+        <div class="stat-item">
+          <strong>{{ usuario().following }}</strong>
+          <p class="stat-label">Siguiendo</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <h5 class="mb-3">
+          <i class="bi bi-bar-chart-line"></i> Actividad en GitHub
+        </h5>
+        <img
+          src="https://ghchart.rshah.org/2CB1BF/aletomk"
+          alt="Gráfico de contribuciones GitHub"
+          class="github-chart"
+        />
+      </div>
+
+      <div class="text-center mt-4">         
+        <a [href]="usuario().html_url"
+          target="_blank"
+          class="btn btn-primary">
+          <i class="bi bi-github"></i> Ver perfil en GitHub
         </a>
       </div>
+
+      <hr class="my-4">
+
+      <div class="juego-propio">
+        <h4 class="mb-3">
+          <i class="bi bi-controller"></i> Mi Juego Propio
+        </h4>
+        <h5>
+          <i class="bi bi-car-front"></i> Logo Quiz Automotriz
+        </h5>
+        <p>
+          Un quiz visual donde tenés que adivinar la marca de autos según su logo.
+          La dificultad aumenta progresivamente en 3 niveles.
+        </p>
+        <ul class="lista-niveles">
+          <li>
+            <i class="bi bi-circle-fill text-success"></i>
+            <strong>Fácil</strong> → 5 marcas que se ven de manera cotidiana en la calle.
+          </li>
+          <li>
+            <i class="bi bi-circle-fill text-warning"></i>
+            <strong>Medio</strong> → 5 marcas más exclusivas.
+          </li>
+          <li>
+            <i class="bi bi-circle-fill text-danger"></i>
+            <strong>Difícil</strong> → 5 marcas que dejaron de existir.
+          </li>
+        </ul>
+        <p class="mt-3">
+          En cada nivel se muestra el logo sin el nombre y tenés que elegir entre 4 opciones.
+          El puntaje depende del nivel y la velocidad de respuesta.
+        </p>
+      </div>
+
     </div>
   }
 
