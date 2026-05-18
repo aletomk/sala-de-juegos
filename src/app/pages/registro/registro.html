@@ -1,0 +1,99 @@
+<div class="container mt-5 animate-fadeInUp">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-5">
+      <div class="card shadow">
+        <div class="card-body p-4">
+
+          <h2 class="card-title text-center mb-4">
+            <i class="bi bi-person-plus"></i> Registro
+          </h2>
+
+          @if (errorMessage()) {
+            <div class="alert alert-danger">
+              <i class="bi bi-exclamation-triangle"></i> {{ errorMessage() }}
+            </div>
+          }
+
+          @if (successMessage()) {
+            <div class="alert alert-success">
+              <i class="bi bi-check-circle"></i> {{ successMessage() }}
+            </div>
+          }
+
+          <div class="row">
+            <div class="col-6 mb-3">
+              <label class="form-label">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                [value]="nombre()"
+                (input)="nombre.set($any($event.target).value)"
+                placeholder="Juan"
+              />
+            </div>
+            <div class="col-6 mb-3">
+              <label class="form-label">Apellido</label>
+              <input
+                type="text"
+                class="form-control"
+                [value]="apellido()"
+                (input)="apellido.set($any($event.target).value)"
+                placeholder="Pérez"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Edad</label>
+            <input
+              type="number"
+              class="form-control"
+              [value]="edad()"
+              (input)="edad.set($any($event.target).value)"
+              placeholder="25"
+              min="1"
+              max="99"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              [value]="email()"
+              (input)="email.set($any($event.target).value)"
+              placeholder="tu@email.com"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              [value]="password()"
+              (input)="password.set($any($event.target).value)"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button
+            class="btn btn-success w-100 mt-2"
+            (click)="onRegistro()"
+          >
+            <i class="bi bi-person-check"></i> Registrarme
+          </button>
+
+          <hr />
+
+          <p class="texto-redireccion">
+            ¿Ya tenés cuenta?
+            <a routerLink="/login">Iniciá sesión</a>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

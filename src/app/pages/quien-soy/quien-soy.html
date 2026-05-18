@@ -1,0 +1,55 @@
+<div class="container mt-4 animate-fadeInUp">
+
+  @if (cargando()) {
+    <div class="text-center mt-5">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p class="mt-2">Cargando perfil...</p>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="alert alert-danger text-center">
+      No se pudo cargar el perfil de GitHub.
+    </div>
+  }
+
+  @if (usuario()) {
+    <div class="card mx-auto" style="max-width: 500px;">
+      <div class="card-body text-center">
+        <img 
+          [src]="usuario().avatar_url" 
+          alt="Foto de perfil"
+          class="rounded-circle mb-3"
+          width="120"
+          height="120"
+        />
+        <h2 class="card-title">{{ usuario().name || usuario().login }}</h2>
+        <p class="text-muted">{{ usuario().bio }}</p>
+        
+        <div class="row text-center mt-3">
+          <div class="col">
+            <strong>{{ usuario().public_repos }}</strong>
+            <p class="stat-label">Repositorios</p>
+          </div>
+          <div class="col">
+            <strong>{{ usuario().followers }}</strong>
+            <p class="stat-label">Seguidores</p>
+          </div>
+          <div class="col">
+            <strong>{{ usuario().following }}</strong>
+            <p class="stat-label">Siguiendo</p>
+          </div>
+        </div>
+
+        <a 
+          [href]="usuario().html_url" 
+          target="_blank" 
+          class="btn btn-dark mt-3"
+        >
+          Ver perfil en GitHub
+        </a>
+      </div>
+    </div>
+  }
+
+</div>

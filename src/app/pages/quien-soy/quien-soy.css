@@ -1,0 +1,6 @@
+.stat-label {
+  color: var(--color-crema);
+  font-size: 0.85rem;
+  opacity: 0.85;
+  margin-top: 0.25rem;
+}
