@@ -1,6 +1,81 @@
+.perfil-card {
+  max-width: 750px;
+  background-color: #1e3347;
+  border: 0.0625rem solid var(--color-teal-oscuro);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.perfil-avatar {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  border: 0.2rem solid var(--color-teal-medio);
+  object-fit: cover;
+}
+
+.perfil-bio {
+  color: var(--color-crema);
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-top: 0.5rem;
+}
+
+.perfil-fecha {
+  color: var(--color-teal-claro);
+  font-size: 0.9rem;
+}
+
+.perfil-stats {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  background-color: #253d52;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.stat-item strong {
+  font-size: 1.5rem;
+  color: var(--color-teal-medio);
+}
+
 .stat-label {
   color: var(--color-crema);
   font-size: 0.85rem;
   opacity: 0.85;
   margin-top: 0.25rem;
+}
+
+.juego-propio {
+  color: var(--color-crema);
+}
+
+.juego-propio h4 {
+  color: var(--color-teal-medio);
+}
+
+.juego-propio h5 {
+  color: var(--color-naranja);
+}
+
+.lista-niveles {
+  list-style: none;
+  padding: 0;
+}
+
+.lista-niveles li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.github-chart {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 0.5rem;
+  opacity: 0.9;
 }
