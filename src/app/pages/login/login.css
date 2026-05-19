@@ -1,0 +1,18 @@
+.acceso-rapido-titulo {
+  color: var(--color-teal-claro);
+  font-size: 0.9rem;
+}
+
+.btn-acceso-rapido {
+  background-color: #253d52;
+  border: 0.0625rem solid var(--color-teal-oscuro);
+  color: var(--color-crema);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.btn-acceso-rapido:hover {
+  background-color: var(--color-teal-oscuro);
+  border-color: var(--color-teal-medio);
+  color: var(--color-blanco);
+}

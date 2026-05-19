@@ -1,12 +1,12 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, signal, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { Supabase } from '../../services/supabase';
 
 /**
  * Componente Login - Inicio de sesión de usuarios.
  * 
- * Sprint 1: Validación básica de campos vacíos, sin conexión a Supabase.
- * Sprint 2: Se conectará con Supabase Auth para autenticación real
- *           con email y contraseña, y se agregarán 3 botones de acceso rápido.
+ * Sprint 2: Conectado con Supabase Auth para autenticación real.
+ * Incluye 3 botones de acceso rápido para testing.
  */
 @Component({
   selector: 'app-login',
@@ -17,31 +17,66 @@ import { RouterLink } from '@angular/router';
 })
 export class Login {
 
-  /**
-   * Signals para los campos del formulario.
-   * Usamos signals en lugar de [(ngModel)] que es la forma
-   * moderna de Angular 21 para manejar estado reactivo.
-   * Cada vez que el usuario escribe, el signal se actualiza
-   * con email.set() y password.set() desde el template.
-   */
+  // Inyección de servicios
+  private supabaseService = inject(Supabase);
+  private router = inject(Router);
+
+  // Signals para los campos del formulario
   email = signal('');
   password = signal('');
 
-  // Signal para mostrar mensajes de error sin usar alert()
+  // Signals para feedback y estado de carga
   errorMessage = signal('');
+  cargando = signal(false);
 
   /**
-   * Maneja el intento de inicio de sesión.
-   * En Sprint 1 solo valida que los campos no estén vacíos.
-   * En Sprint 2 se conectará con supabase.auth.signInWithPassword()
+   * Usuarios de prueba para los 3 botones de acceso rápido.
+   * Permiten testear la app sin tener que escribir credenciales.
+   * Estos usuarios deben estar registrados previamente en Supabase.
    */
-  onLogin() {
-    // Validación básica de campos vacíos
+  usuariosRapidos = [
+    { nombre: 'Usuario 1', email: 'usuario1@test.com', password: 'test1234' },
+    { nombre: 'Usuario 2', email: 'usuario2@test.com', password: 'test1234' },
+    { nombre: 'Usuario 3', email: 'usuario3@test.com', password: 'test1234' },
+  ];
+
+  /**
+   * Maneja el inicio de sesión con email y contraseña.
+   * Usa signInWithPassword de Supabase Auth.
+   * En caso de éxito navega al Home automáticamente.
+   */
+  async onLogin() {
     if (!this.email() || !this.password()) {
       this.errorMessage.set('Por favor completá todos los campos');
       return;
     }
 
-    console.log('Login con:', this.email(), this.password());
+    this.cargando.set(true);
+    this.errorMessage.set('');
+
+    const { error } = await this.supabaseService.login(
+      this.email(),
+      this.password()
+    );
+
+    if (error) {
+      this.errorMessage.set('Email o contraseña incorrectos');
+      this.cargando.set(false);
+      return;
+    }
+
+    this.cargando.set(false);
+    this.router.navigate(['/home']);
+  }
+
+  /**
+   * Maneja el inicio de sesión rápido con usuarios de prueba.
+   * Recibe el objeto del usuario y llama al mismo método de login.
+   * @param usuario - Objeto con email y password del usuario de prueba
+   */
+  async loginRapido(usuario: { email: string; password: string }) {
+    this.email.set(usuario.email);
+    this.password.set(usuario.password);
+    await this.onLogin();
   }
 }

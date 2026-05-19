@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, signal, inject, OnInit, OnDestroy } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { Supabase } from '../../services/supabase';
 
 /**
  * Componente Home - Página principal de la Sala de Juegos.
- * Muestra las cards de acceso a cada juego disponible.
  * 
- * En Sprint 1 la navegación es libre sin restricciones.
- * En Sprint 2 se agregará lógica condicional según el estado
- * de autenticación del usuario (logueado / no logueado).
+ * Sprint 2: Muestra contenido condicional según el estado de auth.
+ * - Usuario NO logueado: muestra botones de Login y Registro
+ * - Usuario logueado: muestra su nombre y botón de cerrar sesión
+ * 
+ * Implementa OnDestroy para limpiar la suscripción al auth
+ * cuando el componente se destruye y evitar memory leaks.
  */
 @Component({
   selector: 'app-home',
@@ -16,13 +19,17 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+export class Home implements OnInit, OnDestroy {
 
-  /**
-   * Array con los datos de cada juego disponible en la sala.
-   * Se recorre en el template con for para generar las cards dinámicamente.
-   * Cada objeto contiene el nombre, ícono de Bootstrap Icons, ruta y descripción.
-   */
+  private supabaseService = inject(Supabase);
+  private router = inject(Router);
+
+  // Signal que almacena el usuario logueado, null si no hay sesión
+  usuarioActual = signal<any>(null);
+
+  // Referencia a la suscripción para poder cancelarla en OnDestroy
+  private authSubscription: any;
+
   juegos = [
     { 
       nombre: 'Ahorcado', 
@@ -49,4 +56,34 @@ export class Home {
       descripcion: 'Adiviná la marca del auto según su logo' 
     },
   ];
+
+  /**
+   * Al iniciar el componente nos suscribimos a los cambios
+   * de autenticación de Supabase.
+   * Cada vez que el usuario inicia o cierra sesión,
+   * el callback se ejecuta y actualizamos el signal.
+   */
+  ngOnInit() {
+    this.authSubscription = this.supabaseService.onAuthChange(
+      (event, session) => {
+        this.usuarioActual.set(session?.user ?? null);
+      }
+    );
+  }
+
+  /**
+   * Al destruir el componente cancelamos la suscripción
+   * para evitar memory leaks.
+   */
+  ngOnDestroy() {
+    this.authSubscription?.data?.subscription?.unsubscribe();
+  }
+
+  /**
+   * Cierra la sesión del usuario actual y navega al Login.
+   */
+  async onLogout() {
+    await this.supabaseService.logout();
+    this.router.navigate(['/login']);
+  }
 }
