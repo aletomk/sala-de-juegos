@@ -1,5 +1,94 @@
+.subtitulo-home {
+  color: var(--color-crema);
+  font-size: 1.15rem;
+  opacity: 0.9;
+}
+
+.bienvenida-usuario {
+  background-color: #1e3347;
+  border: 0.0625rem solid var(--color-teal-oscuro);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  max-width: 400px;
+  margin: 0 auto 1.5rem;
+}
+
+.saludo {
+  color: var(--color-crema);
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.btn-logout {
+  background-color: transparent;
+  border: 0.0625rem solid #dc3545;
+  color: #ff8a8a;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background-color: #dc3545;
+  color: var(--color-blanco);
+}
+
+.texto-no-logueado {
+  color: var(--color-teal-claro);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.btn-outline-registro {
+  border: 0.0625rem solid var(--color-crema);
+  color: var(--color-crema);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-registro:hover {
+  background-color: var(--color-crema);
+  color: var(--color-fondo);
+}
+
 .card-descripcion {
   color: var(--color-crema);
   font-size: 0.9rem;
   opacity: 0.85;
+}
+
+.card-resultados {
+  background-color: #3d1f0a;
+  border: 0.0625rem solid var(--color-naranja);
+  border-radius: 0.75rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 2.5rem;
+}
+
+.card-resultados:hover {
+  background-color: #4d2a0e;
+  border-color: #ff7a3d;
+  transform: translateY(-0.2rem);
+}
+
+.icono-resultados {
+  font-size: 2rem;
+  color: var(--color-naranja);
+}
+
+.resultados-titulo {
+  color: var(--color-crema);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.resultados-descripcion {
+  color: var(--color-crema);
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.resultados-flecha {
+  color: var(--color-naranja);
+  font-size: 1.2rem;
 }

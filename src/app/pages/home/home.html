@@ -1,10 +1,40 @@
 <div class="container mt-5 animate-fadeInUp">
+
   <div class="text-center mb-5">
     <h1>
       <i class="bi bi-controller"></i> Sala de Juegos
     </h1>
     <p class="subtitulo-home">Elegí un juego y medí tus capacidades</p>
   </div>
+
+  @if (usuarioActual()) {
+    <!-- Usuario logueado -->
+    <div class="bienvenida-usuario text-center mb-4">
+      <p class="saludo">
+        <i class="bi bi-person-check"></i>
+        Bienvenido, <strong>{{ usuarioActual().email }}</strong>
+      </p>
+      <button class="btn btn-logout" (click)="onLogout()">
+        <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+      </button>
+    </div>
+  } @else {
+    <!-- Usuario NO logueado -->
+    <div class="text-center mb-4">
+      <p class="texto-no-logueado">
+        <i class="bi bi-lock"></i>
+        Iniciá sesión para jugar y guardar tus resultados
+      </p>
+      <div class="d-flex justify-content-center gap-3">
+        <a routerLink="/login" class="btn btn-primary">
+          <i class="bi bi-box-arrow-in-right"></i> Iniciar sesión
+        </a>
+        <a routerLink="/registro" class="btn btn-outline-registro">
+          <i class="bi bi-person-plus"></i> Registrarse
+        </a>
+      </div>
+    </div>
+  }
 
   <div class="row justify-content-center g-4">
     @for (juego of juegos; track juego.nombre) {
@@ -25,9 +55,26 @@
     }
   </div>
 
+  <!-- Card especial de Resultados -->
+  <div class="row justify-content-center mt-3">
+    <div class="col-12 col-md-8 col-lg-6">
+      <a routerLink="/resultados" class="card-resultados d-flex align-items-center justify-content-between px-4 py-3">
+        <div class="d-flex align-items-center gap-3">
+          <i class="bi bi-trophy-fill icono-resultados"></i>
+          <div>
+            <h5 class="mb-0 resultados-titulo">Resultados</h5>
+            <p class="mb-0 resultados-descripcion">Clasificación y desempeño de todos los jugadores</p>
+          </div>
+        </div>
+        <i class="bi bi-chevron-right resultados-flecha"></i>
+      </a>
+    </div>
+  </div>
+
   <div class="text-center mt-5">
     <a routerLink="/quien-soy" class="btn btn-outline-secondary">
       <i class="bi bi-person-badge"></i> Ver Quién Soy
     </a>
   </div>
+
 </div>
