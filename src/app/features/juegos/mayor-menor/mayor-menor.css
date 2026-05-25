@@ -1,0 +1,136 @@
+.subtitulo-juego {
+  color: var(--color-crema);
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.badge-puntaje {
+  background-color: #1e3347;
+  border: 0.0625rem solid var(--color-teal-oscuro);
+  border-radius: 2rem;
+  padding: 0.4rem 1rem;
+  color: var(--color-teal-claro);
+  font-size: 0.95rem;
+}
+
+.cartas-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.carta-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carta-label {
+  color: var(--color-teal-claro);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.carta {
+  width: 8rem;
+  height: 11rem;
+  background-color: #1e3347;
+  border: 0.125rem solid var(--color-teal-oscuro);
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.carta-correcta {
+  border-color: var(--color-teal-medio);
+  background-color: rgba(44, 177, 191, 0.15);
+}
+
+.carta-incorrecta {
+  border-color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.15);
+}
+
+.carta-valor {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-crema);
+}
+
+.carta-palo {
+  font-size: 0.85rem;
+  color: var(--color-teal-claro);
+  text-transform: capitalize;
+}
+
+.carta-numero {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-teal-medio);
+}
+
+.mensaje-resultado {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.mensaje-correcto {
+  color: var(--color-teal-claro);
+  background-color: rgba(44, 177, 191, 0.15);
+}
+
+.mensaje-incorrecto {
+  color: #ff8a8a;
+  background-color: rgba(220, 53, 69, 0.15);
+}
+
+.btn-eleccion {
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-mayor {
+  background-color: var(--color-teal-medio);
+  color: var(--color-fondo);
+}
+
+.btn-mayor:hover {
+  background-color: var(--color-teal-oscuro);
+  color: var(--color-blanco);
+}
+
+.btn-menor {
+  background-color: var(--color-naranja);
+  color: var(--color-blanco);
+}
+
+.btn-menor:hover {
+  background-color: #e0520c;
+  color: var(--color-blanco);
+}
+
+.alert-juego {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.alert-derrota {
+  background-color: rgba(220, 53, 69, 0.2);
+  border: 0.0625rem solid #dc3545;
+  color: #ff8a8a;
+}

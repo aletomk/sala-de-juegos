@@ -1,6 +1,6 @@
 import { Component, signal, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { Supabase } from '../../services/supabase';
+import { Supabase } from '../../../shared/services/supabase';
 
 /**
  * Componente Login - Inicio de sesión de usuarios.

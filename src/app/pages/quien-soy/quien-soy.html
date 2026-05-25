@@ -18,29 +18,29 @@
 
       <div class="text-center mb-4">
         <img
-          [src]="usuario().avatar_url"
+          [src]="usuario()?.avatar_url"
           alt="Foto de perfil"
           class="perfil-avatar"
         />
-        <h2 class="mt-3">{{ usuario().name || usuario().login }}</h2>
-        <p class="perfil-bio">{{ usuario().bio }}</p>
+        <h2 class="mt-3">{{ usuario()?.name || usuario()?.login }}</h2>
+        <p class="perfil-bio">{{ usuario()?.bio }}</p>
         <span class="perfil-fecha">
           <i class="bi bi-calendar3"></i>
-          En GitHub desde {{ formatearFecha(usuario().created_at) }}
+          En GitHub desde {{ formatearFecha(usuario()!.created_at) }}
         </span>
       </div>
 
       <div class="perfil-stats">
         <div class="stat-item">
-          <strong>{{ usuario().public_repos }}</strong>
+          <strong>{{ usuario()?.public_repos }}</strong>
           <p class="stat-label">Repositorios</p>
         </div>
         <div class="stat-item">
-          <strong>{{ usuario().followers }}</strong>
+          <strong>{{ usuario()?.followers }}</strong>
           <p class="stat-label">Seguidores</p>
         </div>
         <div class="stat-item">
-          <strong>{{ usuario().following }}</strong>
+          <strong>{{ usuario()?.following }}</strong>
           <p class="stat-label">Siguiendo</p>
         </div>
       </div>
@@ -57,7 +57,7 @@
       </div>
 
       <div class="text-center mt-4">         
-        <a [href]="usuario().html_url"
+        <a [href]="usuario()?.html_url"
           target="_blank"
           class="btn btn-primary">
           <i class="bi bi-github"></i> Ver perfil en GitHub

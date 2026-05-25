@@ -32,6 +32,7 @@
               class="form-control"
               [value]="password()"
               (input)="password.set($any($event.target).value)"
+              (keydown.enter)="onLogin()"
               placeholder="••••••••"
             />
           </div>

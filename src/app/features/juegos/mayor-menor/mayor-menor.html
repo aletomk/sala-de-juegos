@@ -1,0 +1,72 @@
+<div class="container mt-4 animate-fadeInUp">
+  <div class="text-center mb-4">
+    <h2><i class="bi bi-suit-spade"></i> Mayor o Menor</h2>
+    <p class="subtitulo-juego">Adiviná si la próxima carta será mayor o menor</p>
+  </div>
+
+  <!-- Puntaje actual -->
+  <div class="text-center mb-4">
+    <span class="badge-puntaje">
+      <i class="bi bi-star-fill"></i>
+      Cartas acertadas: {{ cartasAcertadas() }}
+    </span>
+  </div>
+
+  @if (cartaActual()) {
+    <!-- Carta actual -->
+    <div class="cartas-container text-center mb-4">
+      <div class="carta-wrapper">
+        <p class="carta-label">Carta actual</p>
+        <div class="carta">
+          <div class="carta-valor">{{ NOMBRES_VALORES[cartaActual()!.valor] }}</div>
+          <div class="carta-palo">{{ cartaActual()!.palo }}</div>
+          <div class="carta-numero">{{ cartaActual()!.valor }}</div>
+        </div>
+      </div>
+
+      @if (cartaSiguiente()) {
+        <div class="carta-wrapper">
+          <p class="carta-label">Carta siguiente</p>
+          <div class="carta" [class.carta-correcta]="acierto()" [class.carta-incorrecta]="!acierto()">
+            <div class="carta-valor">{{ NOMBRES_VALORES[cartaSiguiente()!.valor] }}</div>
+            <div class="carta-palo">{{ cartaSiguiente()!.palo }}</div>
+            <div class="carta-numero">{{ cartaSiguiente()!.valor }}</div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Mensaje de resultado -->
+    @if (mensajeResultado()) {
+      <div class="text-center mb-3">
+        <span class="mensaje-resultado" [class.mensaje-correcto]="acierto()" [class.mensaje-incorrecto]="!acierto()">
+          {{ mensajeResultado() }}
+        </span>
+      </div>
+    }
+
+    <!-- Botones de elección -->
+    @if (!juegoTerminado() && !mostrandoResultado()) {
+      <div class="d-flex justify-content-center gap-3 mb-4">
+        <button class="btn-eleccion btn-mayor" (click)="elegir('mayor')">
+          <i class="bi bi-arrow-up-circle"></i> Mayor
+        </button>
+        <button class="btn-eleccion btn-menor" (click)="elegir('menor')">
+          <i class="bi bi-arrow-down-circle"></i> Menor
+        </button>
+      </div>
+    }
+
+    <!-- Fin del juego -->
+    @if (juegoTerminado()) {
+      <div class="d-flex flex-column align-items-center gap-3 text-center mb-4">
+        <div class="alert-juego alert-derrota">
+          <i class="bi bi-emoji-frown"></i> ¡Juego terminado! Acertaste {{ cartasAcertadas() }} cartas
+        </div>
+        <button class="btn btn-primary" (click)="iniciarJuego()">
+          <i class="bi bi-arrow-clockwise"></i> Jugar de nuevo
+        </button>
+      </div>
+    }
+  }
+</div>

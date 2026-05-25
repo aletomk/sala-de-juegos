@@ -34,10 +34,9 @@
 - 3 botones de inicio de sesión rápido
 
 ### Sprint 3
-- Juego Ahorcado (entrada por botones)
-- Juego Mayor o Menor (baraja española)
-- Sala de chat en tiempo real con Supabase
-- Persistencia de resultados en base de datos
+- Ahorcado funcional con guardado en DB
+- Mayor o Menor funcional con guardado en DB
+- Chat en tiempo real con polling cada 3 segundos
 
 ### Sprint 4
 - Juego Preguntados (API externa)

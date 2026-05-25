@@ -12,7 +12,7 @@
     <div class="bienvenida-usuario text-center mb-4">
       <p class="saludo">
         <i class="bi bi-person-check"></i>
-        Bienvenido, <strong>{{ usuarioActual().email }}</strong>
+        Bienvenido, <strong>{{ usuarioActual()?.email }}</strong>
       </p>
       <button class="btn btn-logout" (click)="onLogout()">
         <i class="bi bi-box-arrow-right"></i> Cerrar sesión
@@ -47,7 +47,11 @@
               <p class="card-descripcion">{{ juego.descripcion }}</p>
             </div>
             <a [routerLink]="juego.ruta" class="btn btn-primary mt-3">
-              Jugar
+              @if (juego.nombre === 'Chat') {
+                <i class="bi bi-chat-dots"></i> Chatear
+              } @else {
+                <i class="bi bi-controller"></i> Jugar
+              }
             </a>
           </div>
         </div>
