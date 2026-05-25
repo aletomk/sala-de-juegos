@@ -14,32 +14,34 @@
             </div>
           }
 
-          @if (successMessage()) {
-            <div class="alert alert-success">
-              <i class="bi bi-check-circle"></i> {{ successMessage() }}
-            </div>
-          }
-
           <div class="row">
             <div class="col-6 mb-3">
               <label class="form-label">Nombre</label>
               <input
                 type="text"
                 class="form-control"
+                [class.input-error]="errorNombre()"
                 [value]="nombre()"
                 (input)="nombre.set($any($event.target).value)"
                 placeholder="Juan"
               />
+              @if (errorNombre()) {
+                <p class="error-campo">{{ errorNombre() }}</p>
+              }
             </div>
             <div class="col-6 mb-3">
               <label class="form-label">Apellido</label>
               <input
                 type="text"
                 class="form-control"
+                [class.input-error]="errorApellido()"
                 [value]="apellido()"
                 (input)="apellido.set($any($event.target).value)"
                 placeholder="Pérez"
               />
+              @if (errorApellido()) {
+                <p class="error-campo">{{ errorApellido() }}</p>
+              }
             </div>
           </div>
 
@@ -48,12 +50,16 @@
             <input
               type="number"
               class="form-control"
+              [class.input-error]="errorEdad()"
               [value]="edad()"
               (input)="edad.set($any($event.target).value)"
               placeholder="25"
               min="1"
               max="99"
             />
+            @if (errorEdad()) {
+              <p class="error-campo">{{ errorEdad() }}</p>
+            }
           </div>
 
           <div class="mb-3">
@@ -61,10 +67,14 @@
             <input
               type="email"
               class="form-control"
+              [class.input-error]="errorEmail()"
               [value]="email()"
               (input)="email.set($any($event.target).value)"
               placeholder="tu@email.com"
             />
+            @if (errorEmail()) {
+              <p class="error-campo">{{ errorEmail() }}</p>
+            }
           </div>
 
           <div class="mb-3">
@@ -72,17 +82,28 @@
             <input
               type="password"
               class="form-control"
+              [class.input-error]="errorPassword()"
               [value]="password()"
               (input)="password.set($any($event.target).value)"
-              placeholder="••••••••"
+              (keydown.enter)="onRegistro()"
+              placeholder="Mínimo 6 caracteres"
             />
+            @if (errorPassword()) {
+              <p class="error-campo">{{ errorPassword() }}</p>
+            }
           </div>
 
           <button
             class="btn btn-success w-100 mt-2"
             (click)="onRegistro()"
+            [disabled]="cargando()"
           >
-            <i class="bi bi-person-check"></i> Registrarme
+            @if (cargando()) {
+              <span class="spinner-border spinner-border-sm me-2"></span>
+              Registrando...
+            } @else {
+              <i class="bi bi-person-check"></i> Registrarme
+            }
           </button>
 
           <hr />

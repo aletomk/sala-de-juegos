@@ -1,16 +1,11 @@
 import { Component, signal, inject, OnInit, OnDestroy } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
-import { Supabase } from './services/supabase';
+import { Supabase } from './shared/services/supabase';
+import { UsuarioAuth } from './shared/interfaces/usuario.interface';
 
 /**
  * Componente raíz de la aplicación.
- * 
- * Sprint 2: El navbar ahora es condicional según el estado de auth.
- * - Usuario NO logueado: muestra Login y Registro
- * - Usuario logueado: muestra solo Quién Soy y cerrar sesión
- * 
- * Se suscribe a los cambios de autenticación de Supabase
- * para actualizar el navbar en tiempo real.
+ * Sprint 3: signal<any> reemplazado por interface UsuarioAuth.
  */
 @Component({
   selector: 'app-root',
@@ -23,10 +18,9 @@ export class App implements OnInit, OnDestroy {
 
   private supabaseService = inject(Supabase);
 
-  // Signal que almacena el usuario logueado, null si no hay sesión
-  usuarioActual = signal<any>(null);
+  // Reemplazamos signal<any> por signal<UsuarioAuth | null>
+  usuarioActual = signal<UsuarioAuth | null>(null);
 
-  // Referencia a la suscripción para cancelarla en OnDestroy
   private authSubscription: any;
 
   ngOnInit() {

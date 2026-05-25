@@ -1,0 +1,114 @@
+.subtitulo-juego {
+  color: var(--color-crema);
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.badge-intentos {
+  background-color: #1e3347;
+  border: 0.0625rem solid var(--color-teal-oscuro);
+  border-radius: 2rem;
+  padding: 0.4rem 1rem;
+  color: var(--color-teal-claro);
+  font-size: 0.95rem;
+}
+
+.ahorcado-dibujo {
+  color: var(--color-crema);
+  font-size: 1rem;
+  line-height: 1.4;
+  display: inline-block;
+  text-align: left;
+  font-family: monospace;
+}
+
+.palabra-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.letra-casilla {
+  display: inline-block;
+  width: 2.2rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  border-bottom: 0.15rem solid var(--color-teal-medio);
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-crema);
+}
+
+.letras-incorrectas {
+  color: #ff8a8a;
+  font-size: 0.95rem;
+}
+
+.alert-juego {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.alert-victoria {
+  background-color: rgba(44, 177, 191, 0.2);
+  border: 0.0625rem solid var(--color-teal-medio);
+  color: var(--color-teal-claro);
+}
+
+.alert-derrota {
+  background-color: rgba(220, 53, 69, 0.2);
+  border: 0.0625rem solid #dc3545;
+  color: #ff8a8a;
+}
+
+.abecedario {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.btn-letra {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.4rem;
+  border: 0.0625rem solid var(--color-teal-oscuro);
+  background-color: #1e3347;
+  color: var(--color-crema);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-letra:hover:not(:disabled) {
+  background-color: var(--color-teal-medio);
+  border-color: var(--color-teal-medio);
+  color: var(--color-fondo);
+}
+
+.btn-letra-correcta {
+  background-color: rgba(44, 177, 191, 0.3);
+  border-color: var(--color-teal-medio);
+  color: var(--color-teal-claro);
+  cursor: not-allowed;
+}
+
+.btn-letra-incorrecta {
+  background-color: rgba(220, 53, 69, 0.2);
+  border-color: #dc3545;
+  color: #ff8a8a;
+  cursor: not-allowed;
+}
+
+.btn-letra:disabled {
+  opacity: 0.6;
+}

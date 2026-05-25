@@ -1,0 +1,50 @@
+<div class="container mt-4 animate-fadeInUp">
+  <div class="text-center mb-4">
+    <h2><i class="bi bi-chat-dots"></i> Sala de Chat</h2>
+    <p class="subtitulo-chat">Chateá en tiempo real con otros jugadores</p>
+  </div>
+
+  <div class="chat-wrapper mx-auto">
+
+    <!-- Lista de mensajes -->
+    <div class="chat-mensajes" #mensajesContainer>
+      @if (mensajes().length === 0) {
+        <p class="text-center sin-mensajes">
+          <i class="bi bi-chat-square-dots"></i>
+          No hay mensajes todavía. ¡Sé el primero en escribir!
+        </p>
+      }
+
+      @for (mensaje of mensajes(); track mensaje.id) {
+        <div class="mensaje-wrapper"
+          [class.mensaje-propio-wrapper]="esMensajePropio(mensaje.usuarioEmail)">
+          <div class="mensaje"
+            [class.mensaje-propio]="esMensajePropio(mensaje.usuarioEmail)"
+            [class.mensaje-ajeno]="!esMensajePropio(mensaje.usuarioEmail)">
+            @if (!esMensajePropio(mensaje.usuarioEmail)) {
+              <p class="mensaje-email">{{ mensaje.usuarioEmail }}</p>
+            }
+            <p class="mensaje-texto">{{ mensaje.mensaje }}</p>
+            <p class="mensaje-hora">{{ formatearHora(mensaje.created_at!) }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Input para enviar mensaje -->
+    <div class="chat-input d-flex gap-2">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Escribí un mensaje..."
+        [value]="nuevoMensaje()"
+        (input)="nuevoMensaje.set($any($event.target).value)"
+        (keydown.enter)="enviarMensaje()"
+      />
+      <button class="btn btn-primary" (click)="enviarMensaje()">
+        <i class="bi bi-send"></i>
+      </button>
+    </div>
+
+  </div>
+</div>

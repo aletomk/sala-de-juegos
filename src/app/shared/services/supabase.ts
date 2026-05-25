@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
+import { ResultadoAhorcado, ResultadoMayorMenor } from '../interfaces/juegos.interface';
 
 /**
  * Servicio principal de Supabase.
@@ -91,5 +92,66 @@ export class Supabase {
     return await this.supabase
       .from('usuarios')
       .insert([datos]);
+  }
+
+  // ─── JUEGOS ──────────────────────────────────────────────
+
+  /**
+   * Guarda el resultado de una partida de Ahorcado en la DB.
+   */
+  async guardarResultadoAhorcado(resultado: ResultadoAhorcado) {
+    return await this.supabase
+      .from('ahorcado_resultados')
+      .insert([resultado]);
+  }
+
+  /**
+   * Guarda el resultado de una partida de Mayor o Menor en la DB.
+   */
+  async guardarResultadoMayorMenor(resultado: ResultadoMayorMenor) {
+    return await this.supabase
+      .from('mayor_menor_resultados')
+      .insert([resultado]);
+  }
+
+  // ─── CHAT ────────────────────────────────────────────────
+
+  /**
+   * Interface para los mensajes del chat.
+   */
+
+  /**
+   * Obtiene todos los mensajes del chat ordenados por fecha.
+   */
+  async getMensajes() {
+    return await this.supabase
+      .from('chat_mensajes')
+      .select('*')
+      .order('created_at', { ascending: true });
+  }
+
+  /**
+   * Envía un mensaje al chat y lo guarda en la DB.
+   */
+  async enviarMensaje(usuarioEmail: string, mensaje: string) {
+    return await this.supabase
+      .from('chat_mensajes')
+      .insert([{ usuarioEmail, mensaje }]);
+  }
+
+  /**
+   * Se suscribe a los mensajes nuevos del chat en tiempo real.
+   * Cada vez que se inserta un mensaje nuevo en la DB,
+   * el callback se ejecuta automáticamente sin recargar la página.
+   */
+  suscribirseAlChat(callback: (mensaje: any) => void) {
+    return this.supabase
+      .channel('chat')
+      .on('postgres_changes', {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'chat_mensajes'
+      }, payload => callback(payload.new))
+      .subscribe();
   }
 }

@@ -1,0 +1,72 @@
+<div class="container mt-4 animate-fadeInUp">
+  <div class="text-center mb-4">
+    <h2><i class="bi bi-alphabet"></i> Ahorcado</h2>
+    <p class="subtitulo-juego">Adiviná la palabra letra por letra</p>
+  </div>
+
+  <!-- Estado del juego -->
+  <div class="juego-info text-center mb-4">
+    <span class="badge-intentos">
+      <i class="bi bi-heart-fill"></i>
+      Intentos restantes: {{ MAX_INTENTOS - intentosFallidos() }}
+    </span>
+  </div>
+
+  <!-- Dibujo del ahorcado -->
+  <div class="text-center mb-4">
+    <pre class="ahorcado-dibujo">{{ getDibujo() }}</pre>
+  </div>
+
+  <!-- Palabra a adivinar -->
+  <div class="palabra-container text-center mb-4">
+    @for (letra of palabraMostrada(); track $index) {
+      <span class="letra-casilla">{{ letra }}</span>
+    }
+  </div>
+
+  <!-- Letras incorrectas -->
+  @if (letrasIncorrectas().length > 0) {
+    <p class="letras-incorrectas text-center mb-3">
+      <i class="bi bi-x-circle"></i>
+      Letras incorrectas: {{ letrasIncorrectas().join(', ') }}
+    </p>
+  }
+
+  <!-- Mensaje de fin de juego -->
+  @if (juegoTerminado()) {
+    <div class="text-center mb-4">
+        <div class="d-flex flex-column align-items-center gap-3">
+        @if (gano()) {
+            <div class="alert-juego alert-victoria">
+            <i class="bi bi-trophy-fill"></i> ¡Ganaste! La palabra era {{ palabraSecreta() }}
+            </div>
+        } @else {
+            <div class="alert-juego alert-derrota">
+            <i class="bi bi-emoji-frown"></i> ¡Perdiste! La palabra era {{ palabraSecreta() }}
+            </div>
+        }
+        <button class="btn btn-primary" (click)="iniciarJuego()">
+            <i class="bi bi-arrow-clockwise"></i> Jugar de nuevo
+        </button>
+        </div>
+    </div>
+  }
+
+  <!-- Botones del abecedario -->
+  @if (!juegoTerminado()) {
+    <div class="abecedario text-center">
+      @for (letra of ABECEDARIO; track letra) {
+        <button
+          class="btn-letra"
+          [class.btn-letra-correcta]="letrasUsadas().includes(letra) && palabraSecreta().includes(letra)"
+          [class.btn-letra-incorrecta]="letrasUsadas().includes(letra) && !palabraSecreta().includes(letra)"
+          [disabled]="letrasUsadas().includes(letra) || juegoTerminado()"
+          (click)="seleccionarLetra(letra)"
+        >
+          {{ letra }}
+        </button>
+      }
+    </div>
+  }
+
+</div>
