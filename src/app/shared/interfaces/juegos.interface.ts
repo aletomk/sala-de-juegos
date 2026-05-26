@@ -35,3 +35,34 @@ export interface MensajeChat {
   mensaje: string;
   created_at?: string;
 }
+
+/**
+ * Interface para el resultado del juego Preguntados.
+ */
+export interface ResultadoPreguntados {
+  usuarioEmail: string;
+  preguntasCorrectas: number;
+  totalPreguntas: number;
+  fecha?: string;
+}
+
+/**
+ * Interface para el resultado del Logo Quiz Automotriz.
+ */
+export interface ResultadoLogoQuiz {
+  usuarioEmail: string;
+  puntaje: number;
+  nivelAlcanzado: string;
+  fecha?: string;
+}
+
+/**
+ * Interface para una pregunta de la API de Preguntados.
+ */
+export interface PreguntaTrivia {
+  question: string;
+  correct_answer: string;
+  incorrect_answers: string[];
+  category: string;
+  opciones?: string[];
+}

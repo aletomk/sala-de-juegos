@@ -1,0 +1,83 @@
+<div class="container mt-4 animate-fadeInUp">
+  <div class="text-center mb-4">
+    <h2><i class="bi bi-car-front"></i> Logo Quiz Automotriz</h2>
+    <p class="subtitulo-juego">Adiviná la marca del auto según su logo</p>
+  </div>
+
+  @if (!juegoTerminado()) {
+
+    <!-- Info del juego -->
+    <div class="juego-info text-center mb-4">
+      <span class="badge-nivel me-3">
+        <i class="bi bi-bar-chart"></i> {{ getNombreNivel() }}
+      </span>
+      <span class="badge-puntaje">
+        <i class="bi bi-star-fill"></i> Puntaje: {{ puntaje() }}
+      </span>
+    </div>
+
+    <!-- Progreso del nivel -->
+    <div class="progreso-container mx-auto mb-4">
+      <div class="d-flex justify-content-between mb-1">
+        <span class="progreso-texto">Logo {{ logoActual() + 1 }} de {{ logosNivel().length }}</span>
+      </div>
+      <div class="barra-progreso">
+        <div
+          class="barra-progreso-fill"
+          [style.width.%]="((logoActual() + 1) / logosNivel().length) * 100"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Mensaje de nivel completado -->
+    @if (nivelCompletado()) {
+      <div class="text-center mb-3">
+        <span class="badge-nivel-completado">
+          <i class="bi bi-trophy"></i> ¡Nivel completado! Siguiente nivel...
+        </span>
+      </div>
+    }
+
+    <!-- Logo a adivinar -->
+    <div class="logo-container text-center mb-4">
+      <img
+        [src]="logoEnJuego().logo"
+        [alt]="'Logo de ' + logoEnJuego().marca"
+        class="logo-imagen"
+      />
+    </div>
+
+    <!-- Opciones -->
+    <div class="opciones-grid mx-auto">
+      @for (opcion of logoEnJuego().opciones; track opcion) {
+        <button
+          class="btn-opcion"
+          [class.opcion-correcta]="respondida() && opcion === logoEnJuego().marca"
+          [class.opcion-incorrecta]="respondida() && opcion === opcionSeleccionada() && opcion !== logoEnJuego().marca"
+          [disabled]="respondida()"
+          (click)="seleccionarOpcion(opcion)"
+        >
+          {{ opcion }}
+        </button>
+      }
+    </div>
+
+  }
+
+  <!-- Fin del juego -->
+  @if (juegoTerminado()) {
+    <div class="d-flex flex-column align-items-center gap-3 text-center mt-4">
+      <div class="resultado-final">
+        <i class="bi bi-trophy-fill icono-resultado"></i>
+        <h4>¡Quiz completado!</h4>
+        <p class="puntaje-final">
+          Puntaje final: <strong>{{ puntaje() }}</strong> puntos
+        </p>
+      </div>
+      <button class="btn btn-primary" (click)="iniciarJuego()">
+        <i class="bi bi-arrow-clockwise"></i> Jugar de nuevo
+      </button>
+    </div>
+  }
+
+</div>

@@ -1,0 +1,91 @@
+<div class="container mt-4 animate-fadeInUp">
+  <div class="text-center mb-4">
+    <h2><i class="bi bi-patch-question"></i> Preguntados</h2>
+    <p class="subtitulo-juego">Respondé preguntas de cultura general</p>
+  </div>
+
+  @if (cargando()) {
+    <div class="text-center mt-5">
+      <div class="spinner-border" role="status"></div>
+      <p class="mt-2">Cargando preguntas...</p>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="text-center mt-5">
+      <div class="alert alert-danger">
+        <i class="bi bi-exclamation-triangle"></i>
+        No se pudieron cargar las preguntas. Verificá tu conexión.
+      </div>
+      <button class="btn btn-primary mt-3" (click)="cargarPreguntas()">
+        <i class="bi bi-arrow-clockwise"></i> Reintentar
+      </button>
+    </div>
+  }
+
+  @if (!cargando() && !error() && !juegoTerminado()) {
+    <div class="preguntados-wrapper mx-auto">
+
+      <!-- Progreso -->
+      <div class="progreso-container mb-3">
+        <div class="d-flex justify-content-between mb-1">
+          <span class="progreso-texto">
+            Pregunta {{ preguntaActual() + 1 }} de {{ TOTAL_PREGUNTAS }}
+          </span>
+          <span class="progreso-texto">
+            <i class="bi bi-check-circle"></i> {{ correctas() }} correctas
+          </span>
+        </div>
+        <div class="barra-progreso">
+          <div
+            class="barra-progreso-fill"
+            [style.width.%]="((preguntaActual() + 1) / TOTAL_PREGUNTAS) * 100"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Pregunta -->
+      <div class="pregunta-card mb-4">
+        <p class="categoria">
+          <i class="bi bi-tag"></i>
+          {{ decodificarHTML(preguntas()[preguntaActual()]?.category ?? '') }}
+        </p>
+        <h5 class="pregunta-texto">
+          {{ decodificarHTML(preguntas()[preguntaActual()]?.question ?? '') }}
+        </h5>
+      </div>
+
+      <!-- Opciones -->
+      <div class="opciones-grid">
+        @for (opcion of preguntas()[preguntaActual()]?.opciones ?? []; track opcion) {
+          <button
+            class="btn-opcion"
+            [class.opcion-correcta]="respondida() && opcion === preguntas()[preguntaActual()].correct_answer"
+            [class.opcion-incorrecta]="respondida() && opcion === opcionSeleccionada() && opcion !== preguntas()[preguntaActual()].correct_answer"
+            [disabled]="respondida()"
+            (click)="seleccionarOpcion(opcion)"
+          >
+            {{ decodificarHTML(opcion) }}
+          </button>
+        }
+      </div>
+
+    </div>
+  }
+
+  @if (juegoTerminado()) {
+    <div class="d-flex flex-column align-items-center gap-3 text-center mt-4">
+      <div class="resultado-final">
+        <i class="bi bi-trophy-fill icono-resultado"></i>
+        <h4>¡Juego terminado!</h4>
+        <p class="puntaje-final">
+          Respondiste correctamente <strong>{{ correctas() }}</strong> de <strong>{{ TOTAL_PREGUNTAS }}</strong> preguntas
+        </p>
+      </div>
+      <button class="btn btn-primary" (click)="reiniciarJuego()">
+        <i class="bi bi-arrow-clockwise"></i> Jugar de nuevo
+      </button>
+    </div>
+  }
+
+</div>
