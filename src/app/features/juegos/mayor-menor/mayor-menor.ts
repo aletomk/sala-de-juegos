@@ -75,7 +75,19 @@ export class MayorMenor implements OnInit {
     const cartaActualValor = this.cartaActual()!.valor;
     const cartaSiguienteValor = siguiente.valor;
 
-    // Verificamos si acertó
+    // Si son iguales, generamos otra carta automáticamente
+    if (cartaActualValor === cartaSiguienteValor) {
+      this.mensajeResultado.set('¡Cartas iguales! Nueva carta...');
+      this.acierto.set(true);
+      setTimeout(() => {
+        this.cartaActual.set(siguiente);
+        this.cartaSiguiente.set(null);
+        this.mostrandoResultado.set(false);
+        this.mensajeResultado.set('');
+      }, 1500);
+      return;
+    }
+
     const acerto =
       (eleccion === 'mayor' && cartaSiguienteValor > cartaActualValor) ||
       (eleccion === 'menor' && cartaSiguienteValor < cartaActualValor);
@@ -85,7 +97,6 @@ export class MayorMenor implements OnInit {
       this.acierto.set(true);
       this.mensajeResultado.set('¡Correcto!');
 
-      // Esperamos 1.5 segundos y continuamos
       setTimeout(() => {
         this.cartaActual.set(siguiente);
         this.cartaSiguiente.set(null);

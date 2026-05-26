@@ -1,0 +1,72 @@
+.subtitulo-resultados {
+  color: var(--color-crema);
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.tabla-card {
+  background-color: #1e3347;
+  border: 0.0625rem solid var(--color-teal-oscuro);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  height: 100%;
+}
+
+.tabla-titulo {
+  color: var(--color-teal-medio);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.0625rem solid var(--color-teal-oscuro);
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.tabla thead tr {
+  border-bottom: 0.0625rem solid var(--color-teal-oscuro);
+}
+
+.tabla th {
+  color: var(--color-teal-claro);
+  font-weight: 600;
+  padding: 0.4rem 0.5rem;
+  text-align: left;
+}
+
+.tabla td {
+  color: var(--color-crema);
+  padding: 0.4rem 0.5rem;
+  border-bottom: 0.0625rem solid rgba(46, 124, 140, 0.2);
+}
+
+.tabla tbody tr:hover {
+  background-color: rgba(44, 177, 191, 0.05);
+}
+
+.posicion {
+  color: var(--color-naranja);
+  font-weight: 700;
+  text-align: center;
+}
+
+.email {
+  color: var(--color-teal-claro);
+  font-size: 0.75rem;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sin-datos {
+  color: var(--color-teal-claro);
+  opacity: 0.7;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 1rem;
+}

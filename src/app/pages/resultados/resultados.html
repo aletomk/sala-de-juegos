@@ -1,0 +1,152 @@
+<div class="container mt-4 animate-fadeInUp">
+  <div class="text-center mb-5">
+    <h2><i class="bi bi-trophy"></i> Resultados</h2>
+    <p class="subtitulo-resultados">Clasificación de jugadores por juego</p>
+  </div>
+
+  @if (cargando()) {
+    <div class="text-center mt-5">
+      <div class="spinner-border" role="status"></div>
+      <p class="mt-2">Cargando resultados...</p>
+    </div>
+  }
+
+  @if (!cargando()) {
+    <div class="row g-4">
+
+      <!-- Ahorcado -->
+      <div class="col-12 col-xl-6">
+        <div class="tabla-card">
+          <h5 class="tabla-titulo">
+            <i class="bi bi-alphabet"></i> Ahorcado
+          </h5>
+          @if (resultadosAhorcado().length === 0) {
+            <p class="sin-datos">No hay resultados todavía</p>
+          } @else {
+            <table class="tabla">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Jugador</th>
+                  <th>Palabra</th>
+                  <th>Tiempo</th>
+                  <th>Letras</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (r of resultadosAhorcado(); track r.id; let i = $index) {
+                  <tr>
+                    <td class="posicion">{{ i + 1 }}</td>
+                    <td class="email">{{ r.usuarioEmail }}</td>
+                    <td>{{ r.palabra }}</td>
+                    <td>{{ r.tiempoSegundos }}s</td>
+                    <td>{{ r.letrasUsadas }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+        </div>
+      </div>
+
+      <!-- Mayor o Menor -->
+      <div class="col-12 col-xl-6">
+        <div class="tabla-card">
+          <h5 class="tabla-titulo">
+            <i class="bi bi-suit-spade"></i> Mayor o Menor
+          </h5>
+          @if (resultadosMayorMenor().length === 0) {
+            <p class="sin-datos">No hay resultados todavía</p>
+          } @else {
+            <table class="tabla">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Jugador</th>
+                  <th>Cartas acertadas</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (r of resultadosMayorMenor(); track r.id; let i = $index) {
+                  <tr>
+                    <td class="posicion">{{ i + 1 }}</td>
+                    <td class="email">{{ r.usuarioEmail }}</td>
+                    <td>{{ r.cartasAcertadas }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+        </div>
+      </div>
+
+      <!-- Preguntados -->
+      <div class="col-12 col-xl-6">
+        <div class="tabla-card">
+          <h5 class="tabla-titulo">
+            <i class="bi bi-patch-question"></i> Preguntados
+          </h5>
+          @if (resultadosPreguntados().length === 0) {
+            <p class="sin-datos">No hay resultados todavía</p>
+          } @else {
+            <table class="tabla">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Jugador</th>
+                  <th>Correctas</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (r of resultadosPreguntados(); track r.id; let i = $index) {
+                  <tr>
+                    <td class="posicion">{{ i + 1 }}</td>
+                    <td class="email">{{ r.usuarioEmail }}</td>
+                    <td>{{ r.preguntasCorrectas }}</td>
+                    <td>{{ r.totalPreguntas }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+        </div>
+      </div>
+
+      <!-- Logo Quiz -->
+      <div class="col-12 col-xl-6">
+        <div class="tabla-card">
+          <h5 class="tabla-titulo">
+            <i class="bi bi-car-front"></i> Logo Quiz Automotriz
+          </h5>
+          @if (resultadosLogoQuiz().length === 0) {
+            <p class="sin-datos">No hay resultados todavía</p>
+          } @else {
+            <table class="tabla">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Jugador</th>
+                  <th>Puntaje</th>
+                  <th>Nivel</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (r of resultadosLogoQuiz(); track r.id; let i = $index) {
+                  <tr>
+                    <td class="posicion">{{ i + 1 }}</td>
+                    <td class="email">{{ r.usuarioEmail }}</td>
+                    <td>{{ r.puntaje }}</td>
+                    <td>{{ r.nivelAlcanzado }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+        </div>
+      </div>
+
+    </div>
+  }
+
+</div>

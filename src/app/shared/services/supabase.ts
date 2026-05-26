@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../../environments/environment';
-import { ResultadoAhorcado, ResultadoMayorMenor } from '../interfaces/juegos.interface';
+import { ResultadoAhorcado, ResultadoMayorMenor, ResultadoPreguntados, ResultadoLogoQuiz } from '../interfaces/juegos.interface';
+
 
 /**
  * Servicio principal de Supabase.
@@ -153,5 +154,65 @@ export class Supabase {
         table: 'chat_mensajes'
       }, payload => callback(payload.new))
       .subscribe();
+  }
+  /**
+   * Guarda el resultado de una partida de Preguntados en la DB.
+   */
+  async guardarResultadoPreguntados(resultado: ResultadoPreguntados) {
+    return await this.supabase
+      .from('preguntados_resultados')
+      .insert([resultado]);
+  }
+
+  /**
+   * Guarda el resultado de una partida de Logo Quiz en la DB.
+   */
+  async guardarResultadoLogoQuiz(resultado: ResultadoLogoQuiz) {
+    return await this.supabase
+      .from('logo_quiz_resultados')
+      .insert([resultado]);
+  }
+
+  // ─── RESULTADOS ──────────────────────────────────────────
+
+  /**
+   * Obtiene todos los resultados de Ahorcado ordenados por menor tiempo.
+   */
+  async getResultadosAhorcado() {
+    return await this.supabase
+      .from('ahorcado_resultados')
+      .select('*')
+      .eq('gano', true)
+      .order('tiempoSegundos', { ascending: true });
+  }
+
+  /**
+   * Obtiene todos los resultados de Mayor o Menor ordenados por más cartas acertadas.
+   */
+  async getResultadosMayorMenor() {
+    return await this.supabase
+      .from('mayor_menor_resultados')
+      .select('*')
+      .order('cartasAcertadas', { ascending: false });
+  }
+
+  /**
+   * Obtiene todos los resultados de Preguntados ordenados por más correctas.
+   */
+  async getResultadosPreguntados() {
+    return await this.supabase
+      .from('preguntados_resultados')
+      .select('*')
+      .order('preguntasCorrectas', { ascending: false });
+  }
+
+  /**
+   * Obtiene todos los resultados de Logo Quiz ordenados por mayor puntaje.
+   */
+  async getResultadosLogoQuiz() {
+    return await this.supabase
+      .from('logo_quiz_resultados')
+      .select('*')
+      .order('puntaje', { ascending: false });
   }
 }

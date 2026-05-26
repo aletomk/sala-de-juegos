@@ -1,0 +1,109 @@
+.subtitulo-juego {
+  color: var(--color-crema);
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.preguntados-wrapper {
+  max-width: 700px;
+}
+
+.progreso-texto {
+  color: var(--color-teal-claro);
+  font-size: 0.85rem;
+}
+
+.barra-progreso {
+  height: 0.4rem;
+  background-color: #1e3347;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.barra-progreso-fill {
+  height: 100%;
+  background-color: var(--color-teal-medio);
+  border-radius: 1rem;
+  transition: width 0.3s ease;
+}
+
+.pregunta-card {
+  background-color: #1e3347;
+  border: 0.0625rem solid var(--color-teal-oscuro);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.categoria {
+  color: var(--color-teal-claro);
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.pregunta-texto {
+  color: var(--color-crema);
+  font-size: 1.1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.opciones-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.btn-opcion {
+  background-color: #1e3347;
+  border: 0.0625rem solid var(--color-teal-oscuro);
+  border-radius: 0.5rem;
+  color: var(--color-crema);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.btn-opcion:hover:not(:disabled) {
+  background-color: var(--color-teal-oscuro);
+  border-color: var(--color-teal-medio);
+}
+
+.btn-opcion:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.opcion-correcta {
+  background-color: rgba(44, 177, 191, 0.25);
+  border-color: var(--color-teal-medio);
+  color: var(--color-teal-claro);
+}
+
+.opcion-incorrecta {
+  background-color: rgba(220, 53, 69, 0.25);
+  border-color: #dc3545;
+  color: #ff8a8a;
+}
+
+.resultado-final {
+  background-color: #1e3347;
+  border: 0.0625rem solid var(--color-teal-oscuro);
+  border-radius: 1rem;
+  padding: 2rem 3rem;
+}
+
+.icono-resultado {
+  font-size: 3rem;
+  color: var(--color-naranja);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.puntaje-final {
+  color: var(--color-crema);
+  font-size: 1.1rem;
+  margin: 0;
+}

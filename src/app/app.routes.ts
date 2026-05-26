@@ -13,13 +13,15 @@ export const routes: Routes = [
   { path: 'login', component: Login },
   { path: 'registro', component: Registro },
   { path: 'quien-soy', component: QuienSoy },
+  { path: 'resultados', canActivate: [authGuard], loadComponent: () => import('./pages/resultados/resultados').then(m => m.Resultados) },
 
   // Rutas privadas
   { path: 'ahorcado', canActivate: [authGuard], loadComponent: () => import('./features/juegos/ahorcado/ahorcado').then(m => m.Ahorcado) },
   { path: 'mayor-menor', canActivate: [authGuard], loadComponent: () => import('./features/juegos/mayor-menor/mayor-menor').then(m => m.MayorMenor) },
   { path: 'chat', canActivate: [authGuard], loadComponent: () => import('./features/chat/chat').then(m => m.Chat) },
-  { path: 'logo-quiz', canActivate: [authGuard], loadComponent: () => import('./pages/home/home').then(m => m.Home) },
-  { path: 'resultados', canActivate: [authGuard], loadComponent: () => import('./pages/home/home').then(m => m.Home) },
+  { path: 'preguntados', canActivate: [authGuard], loadComponent: () => import('./features/juegos/preguntados/preguntados').then(m => m.Preguntados) },
+  { path: 'logo-quiz', canActivate: [authGuard], loadComponent: () => import('./features/juegos/logo-quiz/logo-quiz').then(m => m.LogoQuiz) },
+  { path: 'resultados', canActivate: [authGuard], loadComponent: () => import('./pages/resultados/resultados').then(m => m.Resultados) },
 
   { path: '**', redirectTo: 'home' }
 ];
